@@ -137,7 +137,7 @@ static ErlDrvSSizeT driver_send_bin(t_iconvdrv *iv, ErlDrvBinary *bin, ErlDrvSiz
     i = LOAD_BINARY(spec, i, bin, 0, len);
     i = LOAD_TUPLE(spec, i, 3);
 
-    return driver_send_term(iv->port, to, spec, i);
+    return erl_drv_send_term(driver_mk_port(iv->port), to, spec, i);
 }
 
 /* send {P, ok} to caller */
@@ -152,7 +152,7 @@ static ErlDrvSSizeT driver_send_ok(t_iconvdrv *iv)
     i = LOAD_ATOM(spec, i, am_ok);
     i = LOAD_TUPLE(spec, i, 2);
 
-    return driver_send_term(iv->port, to, spec, i);
+    return erl_drv_send_term(driver_mk_port(iv->port), to, spec, i);
 }
 
 /* send {P, error, Error} to caller */
@@ -168,7 +168,7 @@ static ErlDrvSSizeT driver_send_error(t_iconvdrv *iv, ErlDrvTermData *am)
     i = LOAD_ATOM(spec, i, *am);
     i = LOAD_TUPLE(spec, i, 3);
 
-    return driver_send_term(iv->port, to, spec, i);
+    return erl_drv_send_term(driver_mk_port(iv->port), to, spec, i);
 }
 
 #define CODE_STR_SZ  64
