@@ -5,6 +5,6 @@
   {registered,[iconv]},
   {env, []},
   {mod, {iconv_app, []}},
-  {applications, []},
+  {applications, [kernel, stdlib]},
   {dependencies, []}]}.
 
